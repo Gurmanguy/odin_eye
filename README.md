@@ -22,7 +22,20 @@ Made for fun and practice!
    ```bash
    pip install -r requirements.txt
    ```
- 
+ ## Development Setup
+
+We use a Python virtual environment to isolate dependencies:
+
+```bash
+# 1. Create a venv in the project root
+python3 -m venv .venv
+
+# 2. Activate it
+# Windows (PowerShell):
+.venv\Scripts\Activate.ps1
+
+# 3. Install the project in editable mode
+pip install -e .
 
 ## Usage
 
