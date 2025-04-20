@@ -22,10 +22,9 @@ cd odin_eye
 Create and activate a virtual environment (optional but recommended)
 
 python3 -m venv .venv
-# Windows (PowerShell)
+# Windows PowerShell
 .\.venv\Scripts\Activate.ps1
-# macOS/Linux
-source .venv/bin/activate
+
 
 Install dependencies
 
