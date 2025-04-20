@@ -1,6 +1,7 @@
 # Odin_Eye
 
 A lightweight CLI tool for collecting live process and network activity and exporting it to Google Sheets.
+Made for fun and practice!
 
 ## Features
 
