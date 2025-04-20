@@ -1,14 +1,16 @@
 Odin_Eye
-                                                              
 
 A lightweight CLI tool for collecting live process and network activity and exporting it to Google Sheets.
 
-Features:
+Features
 
 Process Data Collection: Gather process details (PID, command line, executable path, parent PID, username).
-Network Connection Data: Capture active network connections with process context (local/remote addresses, status).
-Google Sheets Export: Push collected data directly to a specified Google Sheet tab.
-CLI Interface: Easy-to-use command-line flags to choose data mode and target sheet.
+
+Network Connection Data: Capture active network connections with process context (local and remote addresses, status).
+
+Google Sheets Export: Push collected data directly to specified worksheet tabs in a Google Spreadsheet.
+
+Command-Line Interface: Easy-to-use flags for selecting data modes and target worksheets.
 
 Installation
 
@@ -17,49 +19,61 @@ Clone the repository
 git clone https://github.com/Gurmanguy/odin_eye.git
 cd odin_eye
 
+Create and activate a virtual environment (optional but recommended)
+
+python3 -m venv .venv
+# Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+# macOS/Linux
+source .venv/bin/activate
+
 Install dependencies
 
 pip install -r requirements.txt
-# or install directly
+
+Or install the package directly:
+
 pip install .
 
 Usage
 
-odin_eye --creds path/to/credentials.json --sheet-id YOUR_SHEET_ID [--mode procs|net] [--sheet-name SHEET_TAB]
+odin_eye --creds path/to/credentials.json --sheet-id YOUR_SHEET_ID [--mode procs net]
 
---creds : Path to your Google service account JSON file.
+--creds: Path to your Google service account JSON file.
 
---sheet-id : ID of the Google Sheet where data will be written.
+--sheet-id: ID of the Google Spreadsheet (from the URL).
 
---mode : procs for process data (default), net for network connection data.
-
---sheet-name : (Optional) Name of the worksheet tab. Defaults to Sheet1 for processes and Sheet2 for network.
+--mode: One or both of procs (process logs) and net (network logs); defaults to both.
 
 Examples
 
-Write process data to default tab:
-
+# Export both process and network logs
 odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs
 
-Write network data to a custom tab:
+# Export only process logs
+odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs --mode procs
 
-odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs --mode net --sheet-name "Connections"
+# Export only network logs
+odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs --mode net
 
 Configuration
 
-Service Account: Create a Google service account and grant it Editor access to your target sheet.
- 
-Export service users credentials via JSON file (includes authentication for Gsheet integration)
+Create a Google service account with the Sheets API enabled.
 
+Share your target spreadsheet with the service account email (Editor role).
+
+Point the --creds flag at the downloaded JSON key file.
 
 Roadmap
 
-#NXLog JSON Integration: Ingest process and network data via NXLog’s JSON output.
+NXLog JSON Integration: Ingest data via NXLog JSON output.
 
-#Local CSV Export: Add a flag (--output csv) to save data locally as CSV files.
+Local CSV Export: Add a --output csv option to save logs locally.
 
-#Test Suite & CI: Implement unit tests and GitHub Actions for continuous integration.
+Test Suite & CI: Implement unit tests and a GitHub Actions workflow.
 
+License
 
-Built with :eye: by Guy Gurman
-PS: made for fun and practice
+MIT License — see LICENSE for details.
+
+Authored by Guy Gurman.
