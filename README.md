@@ -1,95 +1,74 @@
-Odin_Eye
+# Odin_Eye
 
 A lightweight CLI tool for collecting live process and network activity and exporting it to Google Sheets.
 
-Features
+## Features
 
-Process Data Collection
+- **Process Data Collection**: Gather process details including PID, command line, executable path, parent PID, and username.
+- **Network Connection Data**: Capture active network connections with process context such as local and remote addresses and connection status.
+- **Google Sheets Export**: Push the collected data directly into designated tabs of a Google Spreadsheet.
+- **CLI Interface**: Simple command-line flags to select data mode and target worksheet.
 
-PID
+## Installation
 
-Command line arguments
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Gurmanguy/odin_eye.git
+   cd odin_eye
+   ```
 
-Executable path
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+ 
 
-Parent PID
+## Usage
 
-Username
+```bash
+odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID [--mode procs|net]
+```
 
-Network Connection Data
+- `--creds` : Path to your Google service account JSON file (requires Editor access to the sheet).  
+- `--sheet-id` : The ID of the Google Spreadsheet (found in its URL).  
+- `--mode` : `procs` for process data (default), `net` for network connection data, or both when repeated.
 
-Local and remote addresses
+### Examples
 
-Connection status
+- **Process data** (default tab "Process Logs"):
+  ```bash
+  odin_eye --creds cred.json --sheet-id ID
+  ```
 
-Associated process context
+- **Network data** (default tab "Network Logs"):
+  ```bash
+  odin_eye --creds cred.json --sheet-id ID --mode net
+  ```
 
-Google Sheets Export
+- **Both modes**:
+  ```bash
+  odin_eye --creds cred.json --sheet-id ID --mode procs net
+  ```
 
-Writes directly to named worksheet tabs in a Google Spreadsheet
+## Configuration
 
-Command-Line Interface
+1. **Create a Google service account** with the Sheets API enabled.  
+2. **Share** your target spreadsheet with the service account’s email address, granting Editor permissions.  
+3. **Obtain** the service account JSON key file and pass its path via `--creds`.
 
-Select one or both data modes (procs, net)
+## Roadmap
 
-Specify credentials and spreadsheet ID
+- **NXLog JSON Integration**: Ingest process and network data via NXLog’s JSON output.  
+- **Local CSV Export**: Add an `--output csv` flag to save data locally as CSV files.  
+- **Test Suite & CI**: Implement unit tests and set up GitHub Actions for continuous integration.
 
-Installation
+## Contributing
 
-Clone the repository:
+Contributions are welcome. Please open an issue or submit a pull request for any feature requests or bug fixes.
 
-git clone https://github.com/Gurmanguy/odin_eye.git
-cd odin_eye
+## License
 
-(Optional) Create and activate a virtual environment:
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-python3 -m venv .venv
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
+Built by Guy Gurman.
 
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Or install the package itself:
-
-pip install .
-
-Usage
-
-Run both process and network collection (default):
-
-odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID
-
-Run only process logs:
-
-odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID --mode procs
-
-Run only network logs:
-
-odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID --mode net
-
-Command-Line Arguments
-
---creds (required): Path to Google service account JSON file
-
---sheet-id (required): Google Spreadsheet ID (from the URL)
-
---mode: One or more of procs (process logs) and net (network logs). Default is both.
-
-Configuration
-
-Create a Google service account and enable the Sheets API.
-
-Share your target spreadsheet with the service account email (Editor role).
-
-Use the --creds flag to point to the downloaded key JSON.
-
-Roadmap
-
-NXLog JSON integration
-
-Local CSV export via --output csv
-
-Unit tests and CI workflow
