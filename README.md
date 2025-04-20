@@ -4,75 +4,93 @@ A lightweight CLI tool for collecting live process and network activity and expo
 
 Features
 
-Process Data Collection: Gather process details (PID, command line, executable path, parent PID, username).
+Process Data Collection
 
-Network Connection Data: Capture active network connections with process context (local and remote addresses, status).
+PID
 
-Google Sheets Export: Push collected data directly to specified worksheet tabs in a Google Spreadsheet.
+Command line arguments
 
-Command-Line Interface: Easy-to-use flags for selecting data modes and target worksheets.
+Executable path
 
-#Installation
+Parent PID
 
-Clone the repository
+Username
+
+Network Connection Data
+
+Local and remote addresses
+
+Connection status
+
+Associated process context
+
+Google Sheets Export
+
+Writes directly to named worksheet tabs in a Google Spreadsheet
+
+Command-Line Interface
+
+Select one or both data modes (procs, net)
+
+Specify credentials and spreadsheet ID
+
+Installation
+
+Clone the repository:
 
 git clone https://github.com/Gurmanguy/odin_eye.git
 cd odin_eye
 
-Create and activate a virtual environment (optional but recommended)
+(Optional) Create and activate a virtual environment:
 
 python3 -m venv .venv
 # Windows PowerShell
 .\.venv\Scripts\Activate.ps1
+# macOS/Linux
+source .venv/bin/activate
 
-
-Install dependencies
+Install dependencies:
 
 pip install -r requirements.txt
 
-Or install the package directly:
+Or install the package itself:
 
 pip install .
 
 Usage
 
-odin_eye --creds path/to/credentials.json --sheet-id YOUR_SHEET_ID [--mode procs net]
+Run both process and network collection (default):
 
---creds: Path to your Google service account JSON file.
+odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID
 
---sheet-id: ID of the Google Spreadsheet (from the URL).
+Run only process logs:
 
---mode: One or both of procs (process logs) and net (network logs); defaults to both.
+odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID --mode procs
 
-Examples
+Run only network logs:
 
-# Export both process and network logs
-odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs
+odin_eye --creds /path/to/credentials.json --sheet-id YOUR_SHEET_ID --mode net
 
-# Export only process logs
-odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs --mode procs
+Command-Line Arguments
 
-# Export only network logs
-odin_eye --creds cred.json --sheet-id 1ABCdefGHIjklMNOpQRs --mode net
+--creds (required): Path to Google service account JSON file
+
+--sheet-id (required): Google Spreadsheet ID (from the URL)
+
+--mode: One or more of procs (process logs) and net (network logs). Default is both.
 
 Configuration
 
-Create a Google service account with the Sheets API enabled.
+Create a Google service account and enable the Sheets API.
 
 Share your target spreadsheet with the service account email (Editor role).
 
-Point the --creds flag at the downloaded JSON key file.
+Use the --creds flag to point to the downloaded key JSON.
 
 Roadmap
 
-NXLog JSON Integration: Ingest data via NXLog JSON output.
+NXLog JSON integration
 
-Local CSV Export: Add a --output csv option to save logs locally.
+Local CSV export via --output csv
 
-Test Suite & CI: Implement unit tests and a GitHub Actions workflow.
-
-License
-
-MIT License — see LICENSE for details.
-
-Authored by Guy Gurman.
+Unit tests and CI workflow
