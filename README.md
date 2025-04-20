@@ -14,8 +14,8 @@ Installation
 
 Clone the repository
 
-git clone https://github.com/Gurmanguy/Odin_Eye.git
-cd Odin_Eye
+git clone https://github.com/Gurmanguy/odin_eye.git
+cd odin_eye
 
 Install dependencies
 
