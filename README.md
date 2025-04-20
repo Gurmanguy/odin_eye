@@ -12,7 +12,7 @@ Google Sheets Export: Push collected data directly to specified worksheet tabs i
 
 Command-Line Interface: Easy-to-use flags for selecting data modes and target worksheets.
 
-Installation
+#Installation
 
 Clone the repository
 
